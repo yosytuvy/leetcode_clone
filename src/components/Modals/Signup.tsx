@@ -1,11 +1,11 @@
-import { authModalState } from "@/atoms/AuthModalAtom";
+import { authModalState } from "@/atoms/authModalAtom";
 import { auth, firestore } from "@/firebase/firebase";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import { doc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 type SignupProps = {};
 
@@ -22,7 +22,6 @@ const Signup: React.FC<SignupProps> = () => {
     const router = useRouter();
     const [createUserWithEmailAndPassword, user, loading, error] =
         useCreateUserWithEmailAndPassword(auth);
-
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
@@ -41,18 +40,18 @@ const Signup: React.FC<SignupProps> = () => {
                 inputs.password
             );
             if (!newUser) return;
-            // const userData = {
-            //     uid: newUser.user.uid,
-            //     email: newUser.user.email,
-            //     displayName: inputs.displayName,
-            //     createdAt: Date.now(),
-            //     updatedAt: Date.now(),
-            //     likedProblems: [],
-            //     dislikedProblems: [],
-            //     solvedProblems: [],
-            //     starredProblems: [],
-            // };
-            // await setDoc(doc(firestore, "users", newUser.user.uid), userData);
+            const userData = {
+                uid: newUser.user.uid,
+                email: newUser.user.email,
+                displayName: inputs.displayName,
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+                likedProblems: [],
+                dislikedProblems: [],
+                solvedProblems: [],
+                starredProblems: [],
+            };
+            await setDoc(doc(firestore, "users", newUser.user.uid), userData);
             router.push("/");
         } catch (error: any) {
             toast.error(error.message, { position: "top-center" });

@@ -1,11 +1,10 @@
-import { authModalState } from "@/atoms/AuthModalAtom";
+import { authModalState } from "@/atoms/authModalAtom";
 import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { toast } from "react-toastify";
 import { useSetRecoilState } from "recoil";
-
+import { toast } from "react-toastify";
 type LoginProps = {};
 
 const Login: React.FC<LoginProps> = () => {
@@ -13,12 +12,10 @@ const Login: React.FC<LoginProps> = () => {
     const handleClick = (type: "login" | "register" | "forgotPassword") => {
         setAuthModalState((prev) => ({ ...prev, type }));
     };
-
     const [inputs, setInputs] = useState({ email: "", password: "" });
     const [signInWithEmailAndPassword, user, loading, error] =
         useSignInWithEmailAndPassword(auth);
     const router = useRouter();
-    
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
@@ -67,7 +64,10 @@ const Login: React.FC<LoginProps> = () => {
                     type="email"
                     name="email"
                     id="email"
-                    className="border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                    className="
+            border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+            bg-gray-600 border-gray-500 placeholder-gray-400 text-white
+        "
                     placeholder="name@company.com"
                 />
             </div>
@@ -83,9 +83,9 @@ const Login: React.FC<LoginProps> = () => {
                     name="password"
                     id="password"
                     className="
-    border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-    bg-gray-600 border-gray-500 placeholder-gray-400 text-white
-"
+            border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+            bg-gray-600 border-gray-500 placeholder-gray-400 text-white
+        "
                     placeholder="*******"
                 />
             </div>
@@ -93,8 +93,8 @@ const Login: React.FC<LoginProps> = () => {
             <button
                 type="submit"
                 className="w-full text-white focus:ring-blue-300 font-medium rounded-lg
-        text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s
-    ">
+                text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s
+            ">
                 {loading ? "Loading..." : "Log In"}
             </button>
             <button

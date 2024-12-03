@@ -1,10 +1,10 @@
+import { authModalState } from "@/atoms/authModalAtom";
 import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import Login from "./Login";
-import Signup from "./Signup";
 import ResetPassword from "./ResetPassword";
+import Signup from "./Signup";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { authModalState } from "@/atoms/AuthModalAtom";
 
 type AuthModalProps = {};
 
@@ -41,7 +41,6 @@ const AuthModal: React.FC<AuthModalProps> = () => {
     );
 };
 export default AuthModal;
-
 
 function useCloseModal() {
     const setAuthModal = useSetRecoilState(authModalState);
